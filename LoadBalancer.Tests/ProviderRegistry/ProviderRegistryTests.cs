@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace LoadBalancer.Tests
 {
-    public class AbstractLoadBalancerTests
+    public class ProviderRegistryTests
     {
         [SetUp]
         public void Setup()
@@ -16,19 +16,22 @@ namespace LoadBalancer.Tests
         public void LoadBalancer_AddMaxNumberOfProviders_ThrowsNoExceptions()
         {
             // Arrange
-            LoadBalancer lb = new DummyLoadBalancer();
+            var registry = new ProviderRegistry();
             var providers = new List<Provider>();
             providers.Add(new Provider("0"));
 
             // Act
-            lb.Register(providers);
+            registry.Register(providers);
+
+            // Assert
+            Assert.AreEqual(providers, registry.Providers);
         }
 
         [Test]
         public void LoadBalancer_AddZeroProviders_ThrowsArgumentException()
         {
             // Arrange
-            LoadBalancer lb = new DummyLoadBalancer();
+            var lb = new ProviderRegistry();
             var providers = new List<Provider>();
 
             // Act & Assert
@@ -41,7 +44,7 @@ namespace LoadBalancer.Tests
         public void LoadBalancer_AddElevenProviders_ThrowsArgumentException()
         {
             // Arrange
-            LoadBalancer lb = new DummyLoadBalancer();
+            var lb = new ProviderRegistry();
             var providers = Enumerable.Repeat<Provider>(null, 11).ToList();
 
             // Act & Assert

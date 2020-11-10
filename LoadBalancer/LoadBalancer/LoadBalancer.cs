@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace LoadBalancer
 {
@@ -11,22 +9,20 @@ namespace LoadBalancer
 
     public abstract class LoadBalancer : ILoadBalancer
     {
-        protected IList<Provider> Providers;
-        const int MaxLength = 10;
+        protected readonly IProviderRegistry providerRegistry;
+
+        public LoadBalancer(IProviderRegistry providerRegistry)
+        {
+            this.providerRegistry = providerRegistry;
+        }
 
         public void Register(IList<Provider> providers)
         {
-            if (providers.Count > MaxLength)
-            {
-                throw new ArgumentException($"Can't have more than {MaxLength} providers");
-            }
-            if (!providers.Any())
-            {
-                throw new ArgumentException($"Can't have 0 providers");
-            }
-            Providers = providers;
+
         }
 
         public abstract string Get();
     }
+
+
 }
