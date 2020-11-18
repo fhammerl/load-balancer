@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace LoadBalancer.LoadBalancer.Strategies
 {
-    public class RandomLoadBalancerStrategy : ILoadBalancerStrategy
+    public class RandomStrategy : ILoadBalancerStrategy
     {
         private readonly IRandomNumberGenerator random;
 
-        public RandomLoadBalancerStrategy(IRandomNumberGenerator random)
+        public RandomStrategy(IRandomNumberGenerator random)
         {
             this.random = random;
         }

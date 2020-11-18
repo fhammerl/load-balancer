@@ -19,7 +19,7 @@ namespace LoadBalancer.Tests
             // Arrange
             var mockRandom = new Mock<IRandomNumberGenerator>();
             mockRandom.SetupSequence(r => r.Next(It.IsAny<int>(), It.IsAny<int>())).Returns(1).Returns(0).Returns(2); 
-            var strategy = new RandomLoadBalancerStrategy(mockRandom.Object);
+            var strategy = new RandomStrategy(mockRandom.Object);
 
             var providers = new List<IProvider>();
             providers.Add(new Provider("0"));
