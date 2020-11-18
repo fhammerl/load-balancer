@@ -14,7 +14,7 @@ namespace LoadBalancer.LoadBalancer.Strategies
         }
         public IProvider SelectProvider(IList<IProvider> providers)
         {
-            throw new NotImplementedException();
+            return providers[random.Next(0, providers.Count)];
         }
     }
 }
