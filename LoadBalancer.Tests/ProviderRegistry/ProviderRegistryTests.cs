@@ -14,7 +14,7 @@ namespace LoadBalancer.Tests
         }
 
         [Test]
-        public void LoadBalancer_AddMaxNumberOfProviders_ThrowsNoExceptions()
+        public void ProviderRegistry_AddMaxNumberOfProviders_ThrowsNoExceptions()
         {
             // Arrange
             var registry = new ProviderRegistry();
@@ -29,7 +29,7 @@ namespace LoadBalancer.Tests
         }
 
         [Test]
-        public void LoadBalancer_AddZeroProviders_ThrowsArgumentException()
+        public void ProviderRegistry_AddZeroProviders_ThrowsArgumentException()
         {
             // Arrange
             var lb = new ProviderRegistry();
@@ -42,7 +42,7 @@ namespace LoadBalancer.Tests
         }
 
         [Test]
-        public void LoadBalancer_AddElevenProviders_ThrowsArgumentException()
+        public void ProviderRegistry_AddElevenProviders_ThrowsArgumentException() // TODO: Change to ProviderRegistry_AddMoreThanMaxProviders_ThrowsArgumentException when the hardcoded constant becomes configurable
         {
             // Arrange
             var lb = new ProviderRegistry();
