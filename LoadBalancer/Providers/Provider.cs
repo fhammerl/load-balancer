@@ -1,4 +1,4 @@
-﻿namespace LoadBalancer
+﻿namespace LoadBalancer.Providers
 {
     public interface IProvider
     {
@@ -7,7 +7,7 @@
 
     public class Provider : IProvider
     {
-        private string id;
+        private readonly string id;
 
         public Provider(string id)
         {

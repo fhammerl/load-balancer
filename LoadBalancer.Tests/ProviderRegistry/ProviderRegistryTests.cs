@@ -1,3 +1,4 @@
+using LoadBalancer.Providers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace LoadBalancer.Tests
         {
             // Arrange
             var registry = new ProviderRegistry();
-            var providers = new List<Provider>();
+            var providers = new List<IProvider>();
             providers.Add(new Provider("0"));
 
             // Act
@@ -32,7 +33,7 @@ namespace LoadBalancer.Tests
         {
             // Arrange
             var lb = new ProviderRegistry();
-            var providers = new List<Provider>();
+            var providers = new List<IProvider>();
 
             // Act & Assert
             var ex = Assert.Throws<ArgumentException>(() => lb.Register(providers));
@@ -45,7 +46,7 @@ namespace LoadBalancer.Tests
         {
             // Arrange
             var lb = new ProviderRegistry();
-            var providers = Enumerable.Repeat<Provider>(null, 11).ToList();
+            var providers = Enumerable.Repeat<IProvider>(null, 11).ToList();
 
             // Act & Assert
             var ex = Assert.Throws<ArgumentException>(() => lb.Register(providers));

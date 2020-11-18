@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LoadBalancer
+namespace LoadBalancer.Providers
 {
     public interface IProviderRegistry
     {
-        void Register(IList<Provider> providers);
-        IList<Provider> Providers { get; }
+        void Register(IList<IProvider> providers);
+        IList<IProvider> Providers { get; }
     }
     public class ProviderRegistry : IProviderRegistry
     {
-        public IList<Provider> Providers { get; set; }
+        public IList<IProvider> Providers { get; set; }
         const int MaxLength = 10; // TODO: Should come from a config file
 
-        IList<Provider> IProviderRegistry.Providers => throw new NotImplementedException();
+        IList<IProvider> IProviderRegistry.Providers => throw new NotImplementedException();
 
-        public void Register(IList<Provider> providers)
+        public void Register(IList<IProvider> providers)
         {
             if (providers.Count > MaxLength)
             {

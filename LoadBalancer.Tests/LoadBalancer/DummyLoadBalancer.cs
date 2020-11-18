@@ -1,6 +1,9 @@
-﻿namespace LoadBalancer.Tests
+﻿using LoadBalancer.Core;
+using LoadBalancer.Providers;
+
+namespace LoadBalancer.Tests
 {
-    class DummyLoadBalancer : LoadBalancer
+    class DummyLoadBalancer : AbstractLoadBalancer
     {
         public DummyLoadBalancer(IProviderRegistry providerRegistry) : base(providerRegistry)
         {
