@@ -14,7 +14,7 @@ namespace LoadBalancer.Core
 
         public void Register(IList<IProvider> providers)
         {
-
+            providerRegistry.Register(providers);
         }
 
         public abstract string Get();
