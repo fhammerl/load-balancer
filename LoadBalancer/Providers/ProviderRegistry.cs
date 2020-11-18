@@ -7,14 +7,17 @@ namespace LoadBalancer.Providers
     public interface IProviderRegistry
     {
         void Register(IList<IProvider> providers);
-        IList<IProvider> Providers { get; }
+        void Exclude(IProvider provider);
+        void Include(IProvider provider);
+        IList<IProvider> ActiveProviders { get; }
+        IList<IProvider> ExcludedProviders { get; }
     }
     public class ProviderRegistry : IProviderRegistry
     {
-        public IList<IProvider> Providers { get; set; }
+        public IList<IProvider> ActiveProviders { get; private set; }
+        public IList<IProvider> ExcludedProviders { get; private set; }
         const int MaxLength = 10; // TODO: Should come from a config file
 
-        IList<IProvider> IProviderRegistry.Providers => throw new NotImplementedException();
 
         public void Register(IList<IProvider> providers)
         {
@@ -26,7 +29,32 @@ namespace LoadBalancer.Providers
             {
                 throw new ArgumentException($"Can't have 0 providers");
             }
-            Providers = providers;
+            ExcludedProviders = new List<IProvider>();
+            ActiveProviders = providers;
+        }
+
+        public void Exclude(IProvider provider)
+        {
+            if (ActiveProviders.Remove(provider))
+            {
+                ExcludedProviders.Add(provider);
+            }
+            else
+            {
+                throw new ArgumentException("Provider is not registered so it can't be excluded");
+            }
+        }
+
+        public void Include(IProvider provider)
+        {
+            if (ExcludedProviders.Remove(provider))
+            {
+                ActiveProviders.Add(provider);
+            }
+            else
+            {
+                throw new ArgumentException("Provider is not registered so it can't be included");
+            }
         }
     }
 }
