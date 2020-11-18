@@ -1,5 +1,6 @@
 using LoadBalancer.LoadBalancer.Strategies;
 using LoadBalancer.Providers;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -13,16 +14,22 @@ namespace LoadBalancer.Tests
         }
 
         [Test]
-        public void RandomStrategy_ThrowsNoExceptions()
+        public void RandomStrategy_ReturnsProviderAccordingToRandomNumberGenerated()
         {
             // Arrange
-            var strategy = new RandomLoadBalancerStrategy();
+            var mockRandom = new Mock<IRandomNumberGenerator>();
+            mockRandom.SetupSequence(r => r.Next()).Returns(1).Returns(0).Returns(2); 
+            var strategy = new RandomLoadBalancerStrategy(mockRandom.Object);
 
-            // Act
-            registry.Register(providers);
+            var providers = new List<IProvider>();
+            providers.Add(new Provider("0"));
+            providers.Add(new Provider("1"));
+            providers.Add(new Provider("2"));
 
-            // Assert
-            Assert.AreEqual(providers, registry.Providers);
+            // Act & Assert
+            Assert.AreEqual("1", strategy.SelectProvider(providers).Get());
+            Assert.AreEqual("0", strategy.SelectProvider(providers).Get());
+            Assert.AreEqual("2", strategy.SelectProvider(providers).Get());
         }
 
     }
