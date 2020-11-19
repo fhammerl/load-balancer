@@ -20,6 +20,13 @@ namespace LoadBalancer.Tests
             // Arrange
             // Mock the IScheduler and a provider and Spy that the ProviderRegistry's right method is called
         }
+        [Test]
+        [Ignore("TODO")]
+        public void Heartbeat_CheckReturnsTrueOnExcludedTwice_IncludesProvider()
+        {
+            // Arrange
+            // Mock the IScheduler and a provider and Spy that the ProviderRegistry's method is called
+        }
 
     }
 }
