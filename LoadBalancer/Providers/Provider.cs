@@ -3,6 +3,7 @@
     public interface IProvider
     {
         string Get();
+        bool Check();
     }
 
     public class Provider : IProvider
@@ -13,9 +14,15 @@
         {
             this.id = id;
         }
+
+
         public string Get()
         {
             return id;
+        }
+        public bool Check()
+        {
+            return true;
         }
     }
 }
