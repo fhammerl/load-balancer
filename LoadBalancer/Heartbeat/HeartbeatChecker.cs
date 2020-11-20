@@ -47,8 +47,13 @@ namespace LoadBalancer.Heartbeat
             {
                 if (!provider.Check())
                 {
+                    Console.WriteLine($"Healtcheck: Provider excluded: {provider}");
                     providerRegistry.Exclude(provider);
                     unhealthyProviders[provider] = 0;
+                }
+                else
+                {
+                    Console.WriteLine($"Healtcheck: Provider remains active: {provider}");
                 }
             }
         }
@@ -58,15 +63,22 @@ namespace LoadBalancer.Heartbeat
             foreach (var provider in excludedProviders)
             {
                 if (provider.Check())
-                {                    
+                {
                     unhealthyProviders[provider] += 1;
                     if (unhealthyProviders[provider] == consHealthCheckToInclude)
                     {
                         providerRegistry.Include(provider);
+                        Console.WriteLine($"Healtcheck: Provider included: {provider}");
                     }
-                } else
+                    else
+                    {
+                        Console.WriteLine($"Healtcheck: Provider passed health check but remains inactive: {provider}");
+                    }
+                }
+                else
                 {
                     unhealthyProviders[provider] = 0;
+                    Console.WriteLine($"Healtcheck: Provider failed health check: {provider}");
                 }
             }
         }
