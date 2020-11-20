@@ -7,6 +7,7 @@ namespace LoadBalancer.Heartbeat
 {
     public interface IHeartbeatChecker
     {
+        void Start();
     }
 
     public class HeartbeatChecker : IHeartbeatChecker

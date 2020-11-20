@@ -1,5 +1,6 @@
 ﻿using LoadBalancer.Providers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LoadBalancer.Core
 {
@@ -12,11 +13,12 @@ namespace LoadBalancer.Core
             this.providerRegistry = providerRegistry;
         }
 
-        public void Register(IList<IProvider> providers)
+        public virtual void Register(IList<IProvider> providers)
         {
             providerRegistry.Register(providers);
         }
 
-        public abstract string Get();
+        public abstract Task<string> Get();
+        public abstract bool Check();
     }
 }
