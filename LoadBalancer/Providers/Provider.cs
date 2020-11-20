@@ -2,12 +2,6 @@
 
 namespace LoadBalancer.Providers
 {
-    public interface IProvider
-    {
-        Task<string> Get();
-        bool Check(); // should be async too
-    }
-
     public class Provider : IProvider
     {
         private readonly string id;
@@ -25,6 +19,10 @@ namespace LoadBalancer.Providers
         public async Task<string> Get()
         {
             return await Task.FromResult(id);
+        }
+        public override string ToString()
+        {
+            return $"Provider_{id}";
         }
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace LoadBalancer.Core
 {
-    public class LoadBalancer : AbstractLoadBalancer
+    public class DefaultLoadBalancer : AbstractLoadBalancer
     {
         private readonly ILoadBalancerStrategy strategy;
         private readonly IHeartbeatChecker heartbeatChecker;
 
-        public LoadBalancer(IProviderRegistry providerRegistry, ILoadBalancerStrategy strategy, IHeartbeatChecker heartbeatChecker) : base(providerRegistry)
+        public DefaultLoadBalancer(IProviderRegistry providerRegistry, ILoadBalancerStrategy strategy, IHeartbeatChecker heartbeatChecker) : base(providerRegistry)
         {
             this.strategy = strategy;
             this.heartbeatChecker = heartbeatChecker;
